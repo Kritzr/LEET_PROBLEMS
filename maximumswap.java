@@ -1,4 +1,4 @@
-class Solution {
+/*class Solution {
     public int maximumSwap(int num) {
         int maxele;
         ArrayList<Integer> digits = new ArrayList<>();
@@ -20,5 +20,40 @@ class Solution {
         } 
         
         return resultNumber;
+    }
+}*/
+
+class Solution {
+    public int maximumSwap(int num) {
+        
+        char[] digits = Integer.toString(num).toCharArray();
+
+        
+        HashMap<Integer, Integer> lastOccurrence = new HashMap<>();
+
+        
+        for (int i = 0; i < digits.length; i++) {
+            lastOccurrence.put(digits[i] - '0', i); 
+        }
+
+        
+        for (int i = 0; i < digits.length; i++) {
+            
+            for (int d = 9; d > digits[i] - '0'; d--) {
+                
+                if (lastOccurrence.containsKey(d) && lastOccurrence.get(d) > i) {
+                    
+                    char temp = digits[i];
+                    digits[i] = digits[lastOccurrence.get(d)];
+                    digits[lastOccurrence.get(d)] = temp;
+
+                    
+                    return Integer.parseInt(new String(digits));
+                }
+            }
+        }
+
+       
+        return num;
     }
 }
