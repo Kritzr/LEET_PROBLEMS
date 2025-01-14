@@ -1,0 +1,33 @@
+Stack<String> stack = new Stack<>();
+        int n = s.length();
+        StringBuilder word = new StringBuilder();
+
+        // Traverse the string
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+
+            if (c != ' ') {
+                // Add non-space character to word
+                word.append(c);
+            } else if (word.length() > 0) {
+                // Push word to stack on encountering a space
+                stack.push(word.toString());
+                word.setLength(0); // Clear word
+            }
+        }
+
+        // Push the last word (if any)
+        if (word.length() > 0) {
+            stack.push(word.toString());
+        }
+
+        // Pop from stack to form the reversed sentence
+        StringBuilder result = new StringBuilder();
+        while (!stack.isEmpty()) {
+            result.append(stack.pop());
+            if (!stack.isEmpty()) {
+                result.append(" "); // Add space between words
+            }
+        }
+
+        return result.toString();
