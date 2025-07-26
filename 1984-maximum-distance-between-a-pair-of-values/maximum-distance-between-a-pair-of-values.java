@@ -1,5 +1,5 @@
 class Solution {
-    public int maxDistance(int[] nums1, int[] nums2) {
+    /*public int maxDistance(int[] nums1, int[] nums2) {
         int max = 0;
         for(int i =0; i<nums1.length; i++){
             int j = binarysearch(nums2, i, nums1[i]);
@@ -24,5 +24,20 @@ class Solution {
             }
         }
         return answer;
+    }*/
+
+    public int maxDistance(int[] nums1, int[] nums2) {
+        int max = 0;
+        int i = 0;
+        int j = 0; 
+        while(i<nums1.length && j<nums2.length){
+            if(nums1[i] > nums2[j]){
+                i++;
+            }
+            else{
+                max = Math.max(max, j++ -i);
+            }
+        }
+        return max;
     }
 }
