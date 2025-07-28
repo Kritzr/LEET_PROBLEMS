@@ -20,7 +20,8 @@ class Solution {
         long first = Long.parseLong(n.substring(0, (length+1)/2));
         
         for (long i = first - 1; i <= first + 1; ++i) {
-            StringBuilder pallistring = new StringBuilder();
+            StringBuilder pallistring = 
+            new StringBuilder();
             pallistring.append(i); 
             pallistring.append(new StringBuilder(Long.toString(i)).reverse().substring(length % 2));
             pallis.add(Long.parseLong(pallistring.toString()));
