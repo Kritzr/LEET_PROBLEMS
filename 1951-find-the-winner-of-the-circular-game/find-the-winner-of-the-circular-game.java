@@ -10,12 +10,17 @@ class Solution {
     }
 
     public int Josephus(ArrayList<Integer> list, int curr, int k){
+            ArrayList<Integer> killings = new ArrayList<>();
             if(list.size()==1){
                 return list.get(0);
             }
 
             int delete = (curr + k-1)% list.size();
+            killings.add(delete);
+            System.out.println(killings);
             list.remove(delete);
+            
+
             int answer = Josephus(list, delete, k);
             return answer;
             
