@@ -4,18 +4,21 @@ class Solution {
             return 0;
         }
 
-        int globMax = nums[0], globMin = nums[0];
-        int curMax = 0, curMin = 0, total = 0;
+        int max = nums[0];
+        int min = nums[0];
+        int total = 0 ; 
+        int currmax = 0 ; 
+        int currmin = 0 ; 
+        for(int n : nums){
+            currmax = Math.max(currmax+n , n);
+            currmin = Math.min(currmin+n, n);
+            total+=n;
+            max = Math.max(max, currmax);
+            min = Math.min(min, currmin);
 
-        for (int num : nums) {
-            curMax = Math.max(curMax + num, num);
-            curMin = Math.min(curMin + num, num);
-            total += num;
-            globMax = Math.max(globMax, curMax);
-            globMin = Math.min(globMin, curMin);
         }
 
-        return globMax > 0 ? Math.max(globMax, total - globMin) : globMax;
+        return max > 0 ? Math.max(max, total-min) : max;
 
     }
 }
