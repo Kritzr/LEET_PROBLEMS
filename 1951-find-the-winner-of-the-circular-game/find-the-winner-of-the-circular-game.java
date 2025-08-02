@@ -4,25 +4,23 @@ class Solution {
         for(int i =0; i<n; i++){
             list.add(i+1);
         }
+        ArrayList<Integer> killings = new ArrayList<>();
 
-        int answer = Josephus(list, 0, k);
+        int answer = Josephus(list, 0, k, killings);
+        System.out.println(killings);
         return answer;
     }
 
-    public int Josephus(ArrayList<Integer> list, int curr, int k){
-            ArrayList<Integer> killings = new ArrayList<>();
+    public int Josephus(ArrayList<Integer> list, int curr, int k, ArrayList<Integer> killings){
+            
             if(list.size()==1){
                 return list.get(0);
             }
 
             int delete = (curr + k-1)% list.size();
-            killings.add(delete);
-            System.out.println(killings);
-            list.remove(delete);
-            
-
-            int answer = Josephus(list, delete, k);
-            return answer;
+            killings.add(list.remove(delete));
+            return Josephus(list, delete, k, killings);
+          
             
     }
 }
