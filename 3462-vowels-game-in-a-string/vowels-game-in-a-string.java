@@ -12,10 +12,6 @@ class Solution {
         if(count==0){
             return false;
         }
-
-        if(count%2!=0){
-            return true;
-        }
     
 
         return true;
