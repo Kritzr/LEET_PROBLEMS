@@ -1,47 +1,26 @@
 class Solution {
     private int MOD = 1000000007;
-    private int[][] dp;
+    //combinatorics method 
     public int numberOfWays(String corridor) {
-        int n = corridor.length();
-        dp = new int[n][3];//seats can be 0 or 1 or 2
-        for(int i=0; i<n; i++){
-            Arrays.fill(dp[i],-1);
+        List<Integer> noseats = new ArrayList<>();
+        for(int i=0; i<corridor.length(); i++){
+            if(corridor.charAt(i)=='S'){
+                noseats.add(i);
+            }
+
         }
-        
-        return dfs(0,0,corridor);
-    }
-        
-    public int dfs(int i, int seats, String corridor){
-        int res =0;
-        if(i==corridor.length()){
-            if(seats ==2){
-                return 1;
-            }
-            else{
-                return 0;
-            }
+        int length = noseats.size();
+        if(length<2 || length%2!=0){
+            return 0;
         }
 
-        if(dp[i][seats]!=-1){
-            return dp[i][seats];
-        }
+        long ans =1; 
+        for(int i=1; i<length-1; i+=2){
+            ans = (ans*(noseats.get(i+1)-noseats.get(i)))%MOD;
 
-        if(seats==2){
-            if(corridor.charAt(i)=='S'){
-                res = dfs(i+1, 1,corridor);
-            }
-            else{
-                res = (dfs(i+1,0,corridor) + dfs(i+1, 2,corridor))%MOD;
-            }
         }
-        else {
-            if(corridor.charAt(i)=='S'){
-                res = dfs(i+1, seats+1,corridor);
-            }
-            else{
-                res = dfs(i+1, seats, corridor);
-            }
-        }
-        return dp[i][seats]=res;
+        return (int) ans;
     }
+        
+    
 }
